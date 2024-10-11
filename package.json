@@ -1,0 +1,17 @@
+{
+  "name": "test-ln-channel-capacity",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "by-binary-search": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/by-binary-search.ts",
+    "by-channel-state": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/by-channel-state.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
