@@ -1,5 +1,5 @@
 {
-  "name": "test-ln-channel-capacity",
+  "name": "test-lnd-channel-liquidity",
   "version": "0.1.0",
   "type": "module",
   "scripts": {
