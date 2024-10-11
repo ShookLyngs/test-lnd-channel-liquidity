@@ -30,11 +30,11 @@ async function getLocalSpendableByBinarySearch(remotePubkey: string, targetChann
 
 async function main() {
   // Your target channel id
-  const targetChannelId = '3190379223087841281';
+  const channelId = '3190379223087841281';
   // Your target remote node pubkey
   const remotePubkey = '02ab97a479a2aeebb3606e74a001d2822d513c2b6e9f387525a44050b345eed877';
 
-  const localCapacity = await getLocalSpendableByBinarySearch(remotePubkey, targetChannelId);
+  const localCapacity = await getLocalSpendableByBinarySearch(remotePubkey, channelId);
   console.log(`local capacity: ${localCapacity}`);
 }
 
