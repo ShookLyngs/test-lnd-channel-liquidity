@@ -2,8 +2,8 @@
 
 This repository is a test project for comparing the methods of calculating the channel capacity/liquidity in the Lightning Network, using LND but through different APIs:
 
-- `v1/graph/routes/{pubkey}/{amount}`: Get local balance with binary search, by finding the maximum amount that can be sent to a node in a while() loop.
-- `/v1/channels`: Get channel state and calculate liquidity info, e.g. actual spendable satoshis for local and remote, because part of the node balance is reserved and not spendable.
+- `v1/graph/routes/{pubkey}/{amount}`: Get local balance with binary search, by finding the maximum amount that can be sent to a node in a `while()` loop. This function can test the actual spendable balance of the local node, but it doesn't work for inactive channels.
+- `/v1/channels`: Get channel state and calculate liquidity info, e.g. actual spendable balance for local/remote, because part of the node balance is reserved and not spendable. This method also calculates the details in channel reserves. 
 
 ## Setup
 
