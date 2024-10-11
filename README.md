@@ -26,7 +26,7 @@ MACAROON=<your_lnd_macaroon>
 
 ### Calculate by binary search
 
-Run script to calculate local spendable with binary search:
+You can edit the `channelId` and `remotePubkey` in [src/by-binary-search.ts](./src/by-binary-search.ts) and run script:
 
 ```bash
 pnpm run by-bynary-search
@@ -39,7 +39,7 @@ local capacity: 92433
 
 ### Calculate by channel state
 
-Run script to calculate local/remote spendable with channel state:
+You can edit the `channelId` in [src/by-channel-state.ts](./src/by-channel-state.ts) and run script:
 
 ```bash
 pnpm run by-channel-state
