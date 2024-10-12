@@ -3,9 +3,9 @@ import { getChannelById } from './lnd/fetch.js';
 import process from "node:process";
 
 function calculateChannelLiquidity(channel: Channel) {
-  console.log(process.execArgv);
   const isLocalFunder = channel.initiator;
 
+  const funderDustLimit = Number(isLocalFunder ? channel.local_constraints.dust_limit_sat : channel.remote_constraints.dust_limit_sat);
   const funderReserve = Number(isLocalFunder ? channel.local_chan_reserve_sat : channel.remote_chan_reserve_sat);
   const funderBalance = Number(isLocalFunder ? channel.local_balance : channel.remote_balance);
   const funderSpendable = Number(funderBalance) - Number(funderReserve);
@@ -15,6 +15,7 @@ function calculateChannelLiquidity(channel: Channel) {
     spendable: funderSpendable,
   };
 
+  const receiverDustLimit = Number(isLocalFunder ? channel.remote_constraints.dust_limit_sat : channel.local_constraints.dust_limit_sat);
   const receiverReserve = Number(isLocalFunder ? channel.remote_chan_reserve_sat : channel.local_chan_reserve_sat);
   const receiverBalance = Number(isLocalFunder ? channel.remote_balance : channel.local_balance);
   const receiverSpendable = Number(receiverBalance) - Number(receiverReserve);
@@ -28,7 +29,9 @@ function calculateChannelLiquidity(channel: Channel) {
   const totalReserve = capacity - (funderSpendable + receiverSpendable);
   const balancesReserve = funderReserve + receiverReserve;
   const allowAnchors = channel.commitment_type === 'ANCHORS';
-  const anchorsReserve = allowAnchors ? (funderBalance > 0 ? 330 : 0) + (receiverBalance > 0 ? 330 : 0) : 0;
+  const hasFunderAnchor = funderBalance >= funderDustLimit;
+  const hasReceiverAnchor = receiverBalance >= receiverDustLimit;
+  const anchorsReserve = allowAnchors ? (hasFunderAnchor ? 330 : 0) + (hasReceiverAnchor ? 330 : 0) : 0;
   const htlcsReserve = channel.pending_htlcs.reduce((sum, htlc) => sum + Number(htlc.amount), 0);
 
   return {
@@ -51,11 +54,11 @@ async function main() {
 
   const channel = await getChannelById(channelId);
   if (!channel) {
-    console.log('cannot find channel by id:', channelId);
+    console.error('cannot find channel by id:', channelId);
     return;
   }
 
-  const liquidity = calculateChannelLiquidity(channel!);
+  const liquidity = calculateChannelLiquidity(channel);
   console.log(JSON.stringify(liquidity, null, 2));
 }
 
