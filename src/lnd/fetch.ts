@@ -1,6 +1,6 @@
 import 'dotenv/config.js';
 import process from 'node:process';
-import { Channel, LndError, QueryRoutes } from './interface.js';
+import { Channel, LndError, GraphRoutes } from './interface.js';
 
 export function parseEnv() {
   const lndUrl = process.env.LND_URL;
@@ -37,8 +37,8 @@ export function isLndError(res: unknown): res is LndError {
   return (res as LndError).code !== undefined && (res as LndError).message !== undefined;
 }
 
-export async function queryRoutes(remotePubkey: string, amount: number) {
-  return fetchLnd<QueryRoutes>(`v1/graph/routes/${remotePubkey}/${amount}`);
+export async function getGraphRoutes(remotePubkey: string, amount: number) {
+  return fetchLnd<GraphRoutes>(`v1/graph/routes/${remotePubkey}/${amount}`);
 }
 
 export async function getChannels() {

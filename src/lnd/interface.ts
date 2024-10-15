@@ -3,7 +3,7 @@ export interface LndError {
   message: string;
 }
 
-export interface QueryRoutes {
+export interface GraphRoutes {
   routes: {
     total_time_lock: number;
     total_fees: string;
@@ -82,4 +82,22 @@ export interface ChannelConstraints {
   max_pending_amt_msat: string;
   min_htlc_msat: string;
   max_accepted_htlcs: number;
+}
+
+export interface SimplifiedChannel {
+  initiator: boolean;
+  capacity: string;
+  commit_fee: string;
+  local_balance: string;
+  remote_balance: string;
+  commitment_type: "ANCHORS" | string;
+  pending_htlcs: PendingHtlc[];
+  local_constraints: {
+    dust_limit_sat: string;
+    chan_reserve_sat: string;
+  };
+  remote_constraints: {
+    dust_limit_sat: string;
+    chan_reserve_sat: string;
+  };
 }
