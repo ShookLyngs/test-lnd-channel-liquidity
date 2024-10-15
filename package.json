@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "by-binary-search": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/by-binary-search.ts",
-    "by-channel-state": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/by-channel-state.ts"
+    "by-channel-state": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/by-channel-state.ts",
+    "joy-peer-checks": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/joy-peer-checks.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
