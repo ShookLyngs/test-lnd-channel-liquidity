@@ -48,23 +48,24 @@ pnpm run by-channel-state
 Example output:
 ```
 {
-  "capacity": 100000,
-  "reserve": {
-    "total": 2944,
+  "capacity": 20000,
+  "totalReserve": 4825,
+  "balanceReserve": 1354,
+  "outputsReserve": 3471,
+  "reserves": {
+    "fee": 2811,
     "htlcs": 0,
-    "anchors": 660,
-    "balances": 2000,
-    "fee": 284
+    "anchors": 660
   },
   "local": {
     "reserve": 1000,
-    "balance": 93433,
-    "spendable": 92433
+    "balance": 13999,
+    "spendable": 12999
   },
   "remote": {
-    "reserve": 1000,
-    "balance": 5623,
-    "spendable": 4623
+    "reserve": 354,
+    "balance": 2530,
+    "spendable": 2176
   }
 }
 ```
